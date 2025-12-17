@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.AutoConfigureDataJpa;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.event.annotation.BeforeTestExecution;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 class AccountRepositoryTest {
 
@@ -40,6 +42,8 @@ class AccountRepositoryTest {
         Account newAccount = new Account("Big G",BigDecimal.valueOf(2020.20));
         Account insertedAccount = repo.save(newAccount);
         assertEquals(entityManager.find(Account.class, insertedAccount.getId()), newAccount);
+
+        System.out.println(insertedAccount);
 
     }
 

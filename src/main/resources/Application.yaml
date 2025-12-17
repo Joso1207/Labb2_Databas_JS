@@ -2,7 +2,7 @@ spring:
   application:
     name: labb3
   datasource:
-    url: jdbc:postgresql://localhost:5432/Labb_3_Test
+    url: jdbc:postgresql://localhost:5432/Labb_3
     username: postgres
     password: pass
   jpa:
