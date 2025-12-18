@@ -44,7 +44,6 @@ class TransactionRepositoryTest {
         Account acc2 = new Account("Account b",BigDecimal.valueOf(3.20));
         accountRepository.saveAll(List.of(acc1,acc2));
 
-
         List<Account> accounts = accountRepository.findAllById(List.of(1L,2L));
         Transaction newTransaction = new Transaction(BigDecimal.valueOf(200.0));
 
@@ -59,6 +58,28 @@ class TransactionRepositoryTest {
 
     @Test
     void shouldFindTransactionByIDAndIdentifyAccounts(){
+
+
+        List<Account> accounts = accountRepository.findAllById(List.of(1L,2L));
+        Transaction newTransaction = new Transaction(BigDecimal.valueOf(200.0));
+
+        newTransaction.setFromAccount(accounts.get(0));
+        newTransaction.setToAccount(accounts.get(1));
+
+        System.out.println(newTransaction.printInfo());
+
+        Transaction savedTransaction = transactionRepository.save(newTransaction);
+
+        Optional<Transaction> fetchedTransaction = transactionRepository.findById(savedTransaction.getID());
+
+        assertTrue(fetchedTransaction.isPresent());
+        System.out.println(fetchedTransaction.get().printInfo());
+        assertEquals(entityManager.find(Transaction.class,savedTransaction.getID()),newTransaction);
+
+
+
+
+
 
     }
 

@@ -8,17 +8,17 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "transaction_log")
+@Table(name = "transactions")
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     @Column(nullable = false,precision = 10,scale = 2, columnDefinition = "NUMERIC(10,2) CHECK(amount>0)")
     private BigDecimal amount;
     @Column(nullable = false,columnDefinition = "VARCHAR(10) CHECK(status='SUCCESS' OR status='FAILED') DEFAULT 'SUCCESS'")
     private String status = "SUCCESS";
-    @Column
+    @Column(name = "error_msg")
     private String error_message;
 
     @Column(nullable = false,columnDefinition = "DATE CHECK(created_at<=now()) DEFAULT now() ")
@@ -96,4 +96,9 @@ public class Transaction {
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
+
+    public String printInfo(){
+        return "ID#"+ID+"Amount:"+amount +" FROM:"+fromAccount.getOwner_name()+" TO " + toAccount.getOwner_name();
+    }
+
 }
