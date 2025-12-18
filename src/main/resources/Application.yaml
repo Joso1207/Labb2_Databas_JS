@@ -6,6 +6,6 @@ spring:
     username: postgres
     password: pass
   jpa:
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto:
     properties.hibernate.format_sql: true
     hibernate.show-sql: true

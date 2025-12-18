@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String owner_name;
-    @Column(nullable = false)
+    @Column(nullable = false,precision = 10,scale = 2)
     private BigDecimal balance;
     public Account(){
 
