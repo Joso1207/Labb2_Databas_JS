@@ -45,11 +45,11 @@ class TransactionRepositoryTest {
         accountRepository.saveAll(List.of(acc1,acc2));
 
         List<Account> accounts = accountRepository.findAllById(List.of(1L,2L));
-        Transaction newTransaction = new Transaction(BigDecimal.valueOf(200.0));
-
-
-        newTransaction.setFromAccount(accounts.get(0));
-        newTransaction.setToAccount(accounts.get(1));
+        Transaction newTransaction = new Transaction(
+                accounts.get(0),
+                accounts.get(1),
+                BigDecimal.valueOf(200.0)
+        );
 
         Transaction savedTransaction = transactionRepository.save(newTransaction);
         assertEquals(entityManager.find(Transaction.class,savedTransaction.getID()),newTransaction);
@@ -61,10 +61,11 @@ class TransactionRepositoryTest {
 
 
         List<Account> accounts = accountRepository.findAllById(List.of(1L,2L));
-        Transaction newTransaction = new Transaction(BigDecimal.valueOf(200.0));
-
-        newTransaction.setFromAccount(accounts.get(0));
-        newTransaction.setToAccount(accounts.get(1));
+        Transaction newTransaction = new Transaction(
+                accounts.get(0),
+                accounts.get(1),
+                BigDecimal.valueOf(200.0)
+        );
 
         System.out.println(newTransaction.printInfo());
 

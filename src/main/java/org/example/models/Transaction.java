@@ -29,7 +29,14 @@ public class Transaction {
     @ManyToOne
     private Account fromAccount;
 
+    public Transaction(){
+    }
 
+    public Transaction(Account fromAccount,Account toAccount,BigDecimal amount){
+        this.amount = amount;
+        this.toAccount = toAccount;
+        this.fromAccount = fromAccount;
+    }
 
     public Long getID() {
         return ID;
@@ -55,15 +62,6 @@ public class Transaction {
     public void setFromAccount(Account fromAccount) {
         this.fromAccount = fromAccount;
     }
-
-
-
-    public Transaction(){
-    }
-    public Transaction(BigDecimal amount){
-        this.amount = amount;
-    }
-
 
     public BigDecimal getAmount() {
         return amount;
