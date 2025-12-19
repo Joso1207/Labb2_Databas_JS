@@ -52,7 +52,6 @@ class AccountRepositoryTest {
 
     @Test
     void FindByID(){
-        //Sequence still at nextid = 2  due to earlier test
         Account newAccount = new Account("Big A",BigDecimal.valueOf(600.20));
         Account savedAcc = repo.save(newAccount);
         Optional<Account> fetchedAccount = repo.findById(savedAcc.getId());
@@ -88,6 +87,21 @@ class AccountRepositoryTest {
         Account updatedAccount = entityManager.find(Account.class, 1L);
 
         assertEquals(expectedBalance, updatedAccount.getBalance());
+
+    }
+
+    @Test
+    void amountShouldBeSameAfterSavingToDB(){
+
+        Account newAccount = new Account("TEst",BigDecimal.valueOf(9022.03));
+        Account savedAccount = repo.save(newAccount);
+
+        Optional<Account> fetchedAccount = repo.findById(savedAccount.getId());
+
+        assertTrue(fetchedAccount.isPresent());
+        assertEquals(newAccount.getBalance(),fetchedAccount.get().getBalance());
+        System.out.println("Balance was " + newAccount.getBalance() + " And is now "+ fetchedAccount.get().getBalance());
+
 
     }
 

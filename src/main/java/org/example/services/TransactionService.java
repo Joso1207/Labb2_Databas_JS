@@ -24,10 +24,7 @@ public class TransactionService {
 
     @Transactional
     public void transfer(Long fromAccountID, Long toAccountID, BigDecimal amount){
-
-
         try {
-
             if(amount.compareTo(BigDecimal.valueOf(0.0))<1){
                 throw new IllegalArgumentException("Can only accept non-zero positive values");
             }
@@ -49,7 +46,8 @@ public class TransactionService {
             transactionRepository.save(newTransaction);
         }
         catch (Exception E){
-            logger.onTransferFailure();
+            logger.onTransferFailure(fromAccountID,toAccountID,amount,E.getMessage());
+            throw E;
         }
 
     }

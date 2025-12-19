@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Service
 public class TransactionFailureLogger {
 
@@ -13,7 +15,9 @@ public class TransactionFailureLogger {
     TransactionRepository repository;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void onTransferFailure(){
+    public void onTransferFailure(Long fromAccountID, Long toAccountID, BigDecimal amount,String err_msg){
+
+
 
     }
 }
