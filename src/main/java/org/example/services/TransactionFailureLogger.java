@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,15 +20,8 @@ public class TransactionFailureLogger {
     @Autowired
     TransactionRepository transactionRepository;
 
-    @Autowired
-    AccountRepository accountRepository;
-
-
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void onTransferFailure(Long fromAccountID, Long toAccountID, BigDecimal amount,String err_msg){
-
-        List<Account> accounts = accountRepository.findAllById(List.of(fromAccountID,toAccountID));
-        Transaction failedTransaction = new Transaction(accounts.getFirst(),accounts.getLast(),amount);
+    public void onTransferFailure(Transaction failedTransaction, String err_msg){
 
         failedTransaction.setStatus("FAILED");
         failedTransaction.setError_message(err_msg);

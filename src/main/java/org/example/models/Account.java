@@ -3,6 +3,7 @@ package org.example.models;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -11,8 +12,10 @@ public class Account {
     private Long id;
     @Column(nullable = false)
     private String owner_name;
-    @Column(nullable = false,precision = 10,scale = 2)
+    @Column(nullable = false,precision = 10,scale = 2,columnDefinition = ("DECIMAL(10,2)"))
     private BigDecimal balance;
+
+
     public Account(){
 
     }

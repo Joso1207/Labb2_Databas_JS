@@ -14,7 +14,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    @Column(nullable = false,precision = 10,scale = 2, columnDefinition = "NUMERIC(10,2) CHECK(amount>0)")
+    @Column(nullable = false,precision = 10,scale = 2, columnDefinition = "DECIMAL(10,2) CHECK(amount>0)")
     private BigDecimal amount;
     @Column(nullable = false,columnDefinition = "VARCHAR(10) CHECK(status='SUCCESS' OR status='FAILED') DEFAULT 'SUCCESS'")
     private String status = "SUCCESS";
@@ -96,7 +96,7 @@ public class Transaction {
     }
 
     public String printInfo(){
-        return "ID#"+ID+"Amount:"+amount +" FROM:"+fromAccount.getOwner_name()+" TO " + toAccount.getOwner_name();
+        return "ID#"+ID+"Amount:"+amount +" FROM:"+fromAccount.getId()+" TO " + toAccount.getId();
     }
 
 }
