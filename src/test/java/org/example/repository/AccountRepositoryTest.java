@@ -1,22 +1,16 @@
 package org.example.repository;
 
-import org.aspectj.lang.annotation.Before;
+
 import org.example.models.Account;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.jpa.test.autoconfigure.AutoConfigureDataJpa;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
 
 
-import javax.swing.text.html.Option;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,6 +80,7 @@ class AccountRepositoryTest {
         repo.updateBalanceOnAccountWithID(1L, expectedBalance.add(BigDecimal.valueOf(2000)));
         Account updatedAccount = entityManager.find(Account.class, 1L);
 
+        assertNotNull(updatedAccount);
         assertEquals(expectedBalance, updatedAccount.getBalance());
 
     }

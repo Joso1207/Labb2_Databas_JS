@@ -1,7 +1,7 @@
 package org.example.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
+
 
 import java.math.BigDecimal;
 import java.sql.Date;

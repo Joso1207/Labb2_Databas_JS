@@ -3,7 +3,6 @@ package org.example.models;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Entity
 public class Account {
@@ -18,10 +17,6 @@ public class Account {
 
     public Account(){
 
-    }
-
-    public Account(String owner_name){
-        this.owner_name = owner_name;
     }
 
     public Account(String owner_name,BigDecimal initialBalance){

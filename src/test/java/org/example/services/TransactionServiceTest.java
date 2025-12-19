@@ -1,7 +1,5 @@
 package org.example.services;
 
-import jakarta.persistence.EntityManager;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.example.models.Account;
 import org.example.models.Transaction;
 import org.example.repository.AccountRepository;
@@ -12,29 +10,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
+@SuppressWarnings("BigDecimalMethodWithoutRoundingCalled")
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 class TransactionServiceTest {
 
-    @Autowired
-    EntityManager entityManager;
 
     @Autowired
     AccountRepository accountRepository;
 
     @Autowired
     TransactionService service;
-
-    @Autowired
-    TransactionFailureLogger log;
 
     @Test
     void successfulTransfer(){
